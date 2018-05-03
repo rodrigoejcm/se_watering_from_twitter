@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="colorVerdePlanta">#A5C882</color>
+    <color name="colorAzulTwitter">#5299D3</color>
+    <color name="colorVerdePlantaEscuro">#1F3800</color>
+    <color name="colorVerdeMedio">#45CB85</color>
+
+
+
+</resources>

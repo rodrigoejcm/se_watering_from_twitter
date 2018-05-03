@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorVerdeMedio"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/logo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#FFF"
+            android:id="@+id/plant_list_item">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image"
+                android:src="@drawable/icon_folha"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/image"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/plant_info_nome_planta"
+                    android:textSize="16dp"
+                    android:text=""
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/plant_info_id_planta"
+                    android:text="" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <GridLayout
+            android:id="@+id/GridLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:columnCount="4"
+            android:rowCount="5"
+            android:orientation="horizontal"
+            >
+
+            <Space
+                android:layout_row="0"
+                android:layout_column="2"
+                android:layout_columnSpan="0"
+
+                android:background="#fff"
+                android:layout_gravity="fill"
+                />
+
+            <TextView
+                android:id="@+id/value_atual"
+                android:text="Value"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/value_th"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:text="Threshold" />
+
+            <Space
+                android:layout_row="1"
+                android:layout_columnSpan="0"
+                android:layout_gravity="fill_horizontal|center"
+                android:layout_height="10dp"
+                />
+
+            <ImageView
+                android:src="@drawable/icons_temperatura"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <TextView
+                android:id="@+id/label_temp"
+                android:layout_gravity="center_horizontal"
+                android:text="Temperature"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="30dp"
+                />
+
+            <TextView
+                android:id="@+id/value_atual_temp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/value_th_temp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:text="" />
+
+            <ImageView
+                android:src="@drawable/icons_humidade"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <TextView
+                android:id="@+id/label_hum"
+                android:layout_gravity="fill_horizontal|center"
+                android:text="Humidity"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="30dp"
+                />
+
+            <TextView
+                android:id="@+id/value_atual_hum"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/value_th_hum"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:text="" />
+
+            <ImageView
+                android:src="@drawable/icons_luz"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <TextView
+                android:id="@+id/label_lum"
+                android:layout_gravity="fill_horizontal|center"
+                android:text="Luminosity"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="30dp"
+                />
+
+            <TextView
+                android:id="@+id/value_atual_lum"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/value_th_lum"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:text="" />
+
+        </GridLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modify Thresholds"
+                android:id="@+id/btn_config_th"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/btn_config_act"
+                android:text="Manual Actuators Control"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
