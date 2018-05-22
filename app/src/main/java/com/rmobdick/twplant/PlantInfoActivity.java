@@ -33,9 +33,16 @@ public class PlantInfoActivity extends AppCompatActivity {
     private static final String TAG = "PlantInfoActivity";
     private ProgressDialog dialog;
 
+
+    private final String SERVER = "192.168.10.50";
+    private final String PORT = "8000";
+
     RequestQueue queue;
 
-    String url ="https://my-json-server.typicode.com/rodrigoejcm/fakeapi/infos?id=";
+    String url ="http://"+SERVER+":"+PORT+"/plant/info?plant_id=";
+    Double intent_th_temp = 0.0;
+    Double intent_th_hum = 0.0;
+    Double intent_th_luz = 0.0;
 
 
     @Override
@@ -53,15 +60,30 @@ public class PlantInfoActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         getPlantInfoFromApi();
 
-
-
-
     }
+
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart: ONNNNN RESTART");
+        //iniciaListaDePlantas();
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Fetching plant info...");
+        dialog.setCancelable(false);
+
+        //setContentView(R.layout.activity_plant_info);
+
+        // FROM THE API
+        queue = Volley.newRequestQueue(this);
+        getPlantInfoFromApi();
+    }
+
+
 
     public void getPlantInfoFromApi(){
         Log.d(TAG, "getIncomingIntent: Pegando as infos do intet");
         if (getIntent().hasExtra("plant_name") && getIntent().hasExtra("plant_ID")){
-            Log.d(TAG, "getIncomingIntent: achou os extras");
+            Log.d(TAG, "getIncomingIntent: achou os extras" + getIntent().getStringExtra("plant_ID"));
 
             final String plant_name = getIntent().getStringExtra("plant_name");
             final String plant_ID = getIntent().getStringExtra("plant_ID");
@@ -76,7 +98,7 @@ public class PlantInfoActivity extends AppCompatActivity {
 
             // HERE WE CAN CALL THE API WIT HTE EXTRA INFO
             Toast.makeText(this, "API: PLANTINFO GET - Parametro ID "+ plant_ID  , Toast.LENGTH_SHORT).show();
-            getDataFromApi(plant_ID);
+            getDataFromApi(getIntent().getStringExtra("plant_ID"));
             //
 
                 // DUMMY PLANT INFO SET
@@ -101,10 +123,11 @@ public class PlantInfoActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Log.d(TAG, "onClick: Botao clicado");
+
                     Intent intent = new Intent(PlantInfoActivity.this, PlantThActivity.class);
-                    //intent.putExtra("th_temp",round(temp_th,1));
-                    //intent.putExtra("th_hum",round(hum_th,1));
-                    //intent.putExtra("th_lum",round(luz_th,1));
+                    intent.putExtra("th_temp",round(intent_th_temp,1));
+                    intent.putExtra("th_hum",round(intent_th_hum,1));
+                    intent.putExtra("th_lum",round(intent_th_luz,1));
                     intent.putExtra("plant_id",plant_ID);
                     intent.putExtra("plant_name",plant_name);
                     //Log.d(TAG, "getPlantInfoFromApi: botao apertado parametros: " + round(temp_th,2) );
@@ -132,6 +155,8 @@ public class PlantInfoActivity extends AppCompatActivity {
                              double plantHumVal, double plantHumTh,
                              double plantLuzVal, double plantLuzTh){
 
+
+        Log.d(TAG, "setPlantInfo: " + plantTempTh +" -  "+ plantTempVal);
 
         TextView tv_plant_temp_val = findViewById(R.id.value_atual_temp);
         TextView tv_plant_temp_th = findViewById(R.id.value_th_temp);
@@ -164,39 +189,59 @@ public class PlantInfoActivity extends AppCompatActivity {
 
     public void getDataFromApi(String plid){
 
-        this.url = url+plid;
+        String thisurl = url+plid;
 
         // prepare the Request
-        Log.e(TAG, "getDataFromApi: testando");
+        Log.e(TAG, "getDataFromApi: testando " + thisurl);
 
         showDialog();
 
-        JsonArrayRequest getRequest = new JsonArrayRequest(url,
+        JsonArrayRequest getRequest = new JsonArrayRequest(thisurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray responseArray) {
                         try {
                             hideDialog();
                             JSONObject response = responseArray.getJSONObject(0);
+
                             if(response.has("pl_temperature") &
                                     response.has("pl_humidity") &
                                     response.has("pl_luminosity") &
                                     response.has("th_temperature") &
                                     response.has("th_humidity") &
                                     response.has("th_luminosity")){
+
                                 try {
-                                      setPlantInfo(
-                                            response.get("name").toString(),
-                                            response.get("id").toString(),
-                                            response.getDouble("pl_temperature"),
-                                            response.getDouble("th_temperature"),
-                                            response.getDouble("pl_humidity"),
-                                            response.getDouble("th_humidity"),
-                                            response.getDouble("pl_luminosity"),
-                                            response.getDouble("th_luminosity")
+                                        Double pl_T =  Double.parseDouble(response.getString("pl_temperature"));
+                                        Double pl_H =  Double.parseDouble(response.getString("pl_humidity"));
+                                        Double pl_L =  Double.parseDouble(response.getString("pl_luminosity"));
+
+                                        Log.d(TAG, "onResponse: " + pl_T);
+                                        Log.d(TAG, "onResponse: " + pl_H);
+                                        Log.d(TAG, "onResponse: " + pl_L);
+
+                                        Double th_T =  Double.parseDouble(response.getString("th_temperature"));
+                                        Double th_H =  Double.parseDouble(response.getString("th_humidity"));
+                                        Double th_L =  Double.parseDouble(response.getString("th_luminosity"));
+
+                                        setPlantInfo(
+                                            response.getString("name"),
+                                            response.getString("plant_id"),
+                                            pl_T,
+                                            th_T,
+                                            pl_H,
+                                            th_H,
+                                            pl_L,
+                                            th_L
                                       );
+
+                                    intent_th_temp = th_T;
+                                    intent_th_hum = th_H;
+                                    intent_th_luz = th_L;
+
                                 } catch (JSONException e) {
-                                    e.prcd An   intStackTrace();
+                                    e.printStackTrace();
+                                    Log.d(TAG, "onResponse: ;erro");
                                 }
                             }else if(response.length() == 0){
                                 Log.d(TAG, "onResponse: CONECTOU E PEGOU JSON VAZIO");

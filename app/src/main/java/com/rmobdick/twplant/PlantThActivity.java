@@ -12,6 +12,16 @@ import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by rodrigo on 13/04/18.
  * OBS>>>
@@ -48,7 +58,13 @@ public class PlantThActivity extends AppCompatActivity {
     private final double DEF_HUM = 20.0;
     private final int MAX_HUM = 400; // Explicado em cima.
     private final double DEF_LUM = 10.0;
-    private final int MAX_LUM = 200; // Explicado em cima.
+    private final int MAX_LUM = 300; // Explicado em cima.
+
+    private final String SERVER = "192.168.10.50";
+    private final String PORT = "8000";
+
+    RequestQueue queue;
+    String url ="http://"+SERVER+":"+PORT+"/plant/th";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,12 +139,27 @@ public class PlantThActivity extends AppCompatActivity {
             }
         });
 
+
+        queue = Volley.newRequestQueue(this);
+        Log.e(TAG, "initializeVariables: Criou queue");
+
         // BOTAO SAVE TH RETURN INTER
         Button button_save_th = (Button) findViewById(R.id.btn_save_th);
         button_save_th.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+
+
+
+
+                Double new_temp = (double) seekBarTemp.getProgress()/10;
+                Double new_hum = (double) seekBarHum.getProgress()/10;
+                Double new_luz = (double) seekBarLuz.getProgress()/10;
+
+
+
+                sendDataToApi(getIntent().getStringExtra("plant_id"), new_luz, new_hum, new_temp);
                 ////////////////////////////////
                 // API CALL INFORMING NEW VALUES
                 String msgTeste = "API: PLANT_TH $POST : Temp " +
@@ -139,8 +170,12 @@ public class PlantThActivity extends AppCompatActivity {
                 ////////////////////////////////
                 ///////////////////////////////
 
+
+
                 // Back to plantinfo activity
                 Intent returnIntent = new Intent();
+                returnIntent.putExtra("plant_id",getIntent().getStringExtra("plant_id"));
+                returnIntent.putExtra("plant_name",getIntent().getStringExtra("plant_name"));
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }
@@ -194,6 +229,8 @@ public class PlantThActivity extends AppCompatActivity {
             Double th_hum = getIntent().getDoubleExtra("th_hum", DEF_HUM);
             Double th_lum = getIntent().getDoubleExtra("th_lum", DEF_LUM);
 
+            Log.e(TAG, "getIntentInfo: lumi " + th_lum );
+
             // Set initial Th values on the display
             tv_display_temp.setText(String.valueOf(th_temp));
             tv_display_hum.setText(String.valueOf(th_hum));
@@ -219,5 +256,53 @@ public class PlantThActivity extends AppCompatActivity {
     //    floatVal = .5f * intVal;
     //   return round(floatVal,2);
     //}
+
+    public void sendDataToApi(final String plid, final Double tempT, final Double humT, final Double lumT){
+        //this.url = url+plid;
+        Log.e(TAG, "sendDataToApi: TA AQUI");
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+
+                        Log.e(TAG, "sendDataToApi: TA AQUI2" + response);
+                        Log.d("Response", response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        //Log.d("Error.Response");
+                        Log.e(TAG, "sendDataToApi: TA AQUI3");
+                        Log.e(TAG, "onErrorResponse: error ");
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                //String new_act_heat = String.valueOf(sw_act_heat.isChecked());
+                //String new_act_wat = String.valueOf(sw_act_wat.isChecked());
+                //String new_act_luz = String.valueOf(sw_act_luz.isChecked());
+
+                Log.d(TAG, "getParams: " + plid + "-" + lumT + "-" + tempT + " - " + humT);
+
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("plant_id", String.valueOf(plid));
+                params.put("luminosityT", String.valueOf(lumT));
+                params.put("humidityT", String.valueOf(humT));
+                params.put("temperatureT", String.valueOf(tempT));
+                Log.d(TAG, "getParams: "+ params);
+                return params;
+            }
+        };
+        Log.d(TAG, "sendDataToApi: " + postRequest);
+        queue.add(postRequest);
+    }
 
 }
