@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Plasma</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">KKWp9ibbPVPP0qZz2LYviqsDw</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">YoIxvqjqJiayYPbvkn5RqsnDh8EGhZWl6dWpohFAFf5Etqs2Bc</string>
 </resources>

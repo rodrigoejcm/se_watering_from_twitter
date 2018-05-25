@@ -87,7 +87,7 @@ public class PlantActActivity extends AppCompatActivity {
                             sw_act_wat.isChecked() + " - Light " +
                             sw_act_luz.isChecked();
                     sendDataToApi(getIntent().getStringExtra("plant_id"));
-                    Toast.makeText(getApplicationContext(), msgTeste, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), msgTeste, Toast.LENGTH_LONG).show();
                     ////////////////////////////////
                     ///////////////////////////////
                 }
@@ -197,8 +197,8 @@ public class PlantActActivity extends AppCompatActivity {
 
                                     setVariablesValues(
                                             Boolean.valueOf(response.getString("act_temp")),
-                                            Boolean.valueOf(response.getString("act_hum")),
-                                            Boolean.valueOf(response.getString("act_lum")));
+                                            Boolean.valueOf(response.getString("act_lum")),
+                                            Boolean.valueOf(response.getString("act_hum")));
 
 
                                 } catch (JSONException e) {

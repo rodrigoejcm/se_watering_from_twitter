@@ -23,6 +23,8 @@
         <activity android:name=".PlantInfoActivity"></activity>
         <activity android:name=".PlantThActivity"></activity>
         <activity android:name=".PlantActActivity"></activity>
+        <activity android:name=".TwitterFeedActivity"></activity>
+
     </application>
 
 </manifest>

@@ -54,11 +54,11 @@ public class PlantThActivity extends AppCompatActivity {
     // MAX VALUES AS PLANTINFOACT RANDON GENERTOR
 
     private final double DEF_TEMP = 20.0;
-    private final int MAX_TEMP = 300; // Explicado em cima.
+    private final int MAX_TEMP = 400; // Explicado em cima.
     private final double DEF_HUM = 20.0;
-    private final int MAX_HUM = 400; // Explicado em cima.
+    private final int MAX_HUM = 1000; // Explicado em cima.
     private final double DEF_LUM = 10.0;
-    private final int MAX_LUM = 300; // Explicado em cima.
+    private final int MAX_LUM = 1000; // Explicado em cima.
 
     private final String SERVER = "192.168.10.50";
     private final String PORT = "8000";
@@ -159,14 +159,14 @@ public class PlantThActivity extends AppCompatActivity {
 
 
 
-                sendDataToApi(getIntent().getStringExtra("plant_id"), new_luz, new_hum, new_temp);
+                sendDataToApi(getIntent().getStringExtra("plant_id"), new_temp, new_hum, new_luz);
                 ////////////////////////////////
                 // API CALL INFORMING NEW VALUES
                 String msgTeste = "API: PLANT_TH $POST : Temp " +
                         (double) seekBarTemp.getProgress()/10 + " - Hum " +
                         (double) seekBarHum.getProgress()/10 + " - Luz " +
                         (double) seekBarLuz.getProgress()/10;
-                Toast.makeText(getApplicationContext(), msgTeste, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), msgTeste, Toast.LENGTH_LONG).show();
                 ////////////////////////////////
                 ///////////////////////////////
 

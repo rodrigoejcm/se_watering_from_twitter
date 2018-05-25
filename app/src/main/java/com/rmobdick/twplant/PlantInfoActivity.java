@@ -97,7 +97,7 @@ public class PlantInfoActivity extends AppCompatActivity {
 
 
             // HERE WE CAN CALL THE API WIT HTE EXTRA INFO
-            Toast.makeText(this, "API: PLANTINFO GET - Parametro ID "+ plant_ID  , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "API: PLANTINFO GET - Parametro ID "+ plant_ID  , Toast.LENGTH_SHORT).show();
             getDataFromApi(getIntent().getStringExtra("plant_ID"));
             //
 
@@ -145,6 +145,29 @@ public class PlantInfoActivity extends AppCompatActivity {
                     startActivityForResult(intent,1);
                 }
             });
+
+            Button button_config_refresh = (Button) findViewById(R.id.btn_config_refresh);
+            button_config_refresh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+            });
+
+            Button button_twitter = (Button) findViewById(R.id.btn_tweet_feed);
+            button_twitter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(PlantInfoActivity.this, PlantActActivity.class);
+                    intent.putExtra("plant_name",plant_name);
+                    startActivity(intent);
+
+                }
+            });
+
+
             Log.e(TAG, "getPlantInfoFromApi: Iniciou botoes");
 
         }

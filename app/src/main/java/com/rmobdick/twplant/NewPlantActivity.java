@@ -55,7 +55,7 @@ public class NewPlantActivity extends AppCompatActivity {
                 prefs.edit().putString("plantlist", hashMapString).apply();
                 Log.d("prefs", hashMapString);
 
-                Toast.makeText(getApplicationContext(), "New plant added sucessfully!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "New plant added sucessfully!", Toast.LENGTH_LONG).show();
 
                 Intent returnIntent = new Intent();
                 setResult(Activity.RESULT_OK,returnIntent);

@@ -6,6 +6,7 @@ android {
         applicationId "com.rmobdick.twplant"
         minSdkVersion 22
         targetSdkVersion 27
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -29,7 +30,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.android.support:recyclerview-v7:27.1.1'
     compile 'com.android.volley:volley:1.1.0'
-
+    compile 'com.twitter.sdk.android:twitter:3.1.1'
 
 
 }

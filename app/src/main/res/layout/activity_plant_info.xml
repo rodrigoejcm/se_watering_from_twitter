@@ -206,23 +206,72 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:weightSum="2"
             android:layout_marginTop="25dp"
             >
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Modify Thresholds"
+
+                android:layout_height="65dp"
+                android:text="Modify         Thresholds"
+                android:textSize="11dp"
+                android:textAlignment="center"
                 android:id="@+id/btn_config_th"
+                android:layout_width="0dp"
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:layout_weight="1"
+                />
+
+            <Button
+
+                android:layout_height="65dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="0dp"
+                android:textSize="11dp"
+                android:layout_gravity="end"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/btn_config_act"
+                android:text="Manual Actuators Control"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:weightSum="2"
+            android:layout_marginTop="5dp"
+            >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/btn_config_refresh"
+                android:drawableBottom="@drawable/refresh"
+                android:textSize="11dp"
+                android:layout_gravity="end"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="Refresh Data"
                 />
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginTop="5dp"
-                android:id="@+id/btn_config_act"
-                android:text="Manual Actuators Control"
+                android:textSize="11dp"
+                android:layout_gravity="end"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/btn_tweet_feed"
+                android:text="Plants Twitter Feed"
                 />
 
         </LinearLayout>
