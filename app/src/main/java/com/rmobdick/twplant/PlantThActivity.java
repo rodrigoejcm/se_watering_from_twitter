@@ -43,6 +43,7 @@ public class PlantThActivity extends AppCompatActivity {
     private SeekBar seekBarHum;
     private SeekBar seekBarLuz;
 
+    
     private TextView tv_display_temp;
     private TextView tv_display_hum;
     private TextView tv_display_luz;
