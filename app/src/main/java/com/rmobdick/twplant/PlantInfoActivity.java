@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -160,7 +161,7 @@ public class PlantInfoActivity extends AppCompatActivity {
             button_twitter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(PlantInfoActivity.this, PlantActActivity.class);
+                    Intent intent = new Intent(PlantInfoActivity.this, TwitterFeedActivity.class);
                     intent.putExtra("plant_name",plant_name);
                     startActivity(intent);
 

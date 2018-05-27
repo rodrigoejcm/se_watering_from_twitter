@@ -213,12 +213,13 @@
 
             <Button
 
-                android:layout_height="65dp"
-                android:text="Modify         Thresholds"
-                android:textSize="11dp"
+                android:layout_height="70dp"
+                android:text="Modify&#10;Thresholds"
+                android:textSize="14dp"
                 android:textAlignment="center"
                 android:id="@+id/btn_config_th"
                 android:layout_width="0dp"
+
                 android:layout_gravity="end"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -226,11 +227,12 @@
 
             <Button
 
-                android:layout_height="65dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="5dp"
                 android:layout_width="0dp"
-                android:textSize="11dp"
+                android:textSize="14dp"
                 android:layout_gravity="end"
+
                 android:textAlignment="center"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -249,13 +251,14 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="5dp"
                 android:id="@+id/btn_config_refresh"
-                android:drawableBottom="@drawable/refresh"
-                android:textSize="11dp"
+                android:drawableLeft="@drawable/refresh"
+                android:textSize="14dp"
                 android:layout_gravity="end"
                 android:textAlignment="center"
+
                 android:gravity="center"
                 android:layout_weight="1"
                 android:text="Refresh Data"
@@ -263,15 +266,16 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="5dp"
-                android:textSize="11dp"
+                android:textSize="14dp"
                 android:layout_gravity="end"
                 android:textAlignment="center"
+
                 android:gravity="center"
                 android:layout_weight="1"
                 android:id="@+id/btn_tweet_feed"
-                android:text="Plants Twitter Feed"
+                android:text="Plant's Twitter Feed"
                 />
 
         </LinearLayout>
